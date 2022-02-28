@@ -1,0 +1,13 @@
+.botoes-content {
+  display: flex;
+  justify-content: space-around;
+  font-size: 22px;
+}
+
+.button-css {
+  border: 2px solid #555;
+  background-color: #999;
+  border-radius: 8px;
+  padding: 5px 10px;
+  margin: 20px 70px;
+}

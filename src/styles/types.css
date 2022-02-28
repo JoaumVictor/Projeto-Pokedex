@@ -1,0 +1,84 @@
+@import url('http://fonts.cdnfonts.com/css/sansburg');
+
+.x {
+  text-align: center;
+  font-family: 'Sansburg', sans-serif;
+  padding: 1px 8px;
+  margin: 2px 1px;
+  border-radius: 4px;
+  font-size: 16px;
+  width: 65px;
+
+}
+
+.bug {
+  background-color: #729F3F;
+}
+
+.dragon {
+  background-color: #53A4CF;
+}
+
+.grass {
+  background-color: #9BCC50;
+}
+
+.fire {
+  background-color: #FD7D24;
+}
+
+.ghost {
+  background-color: #7B62A3;
+}
+
+.ground {
+  background-color: #F7DE3F;
+}
+
+.poison {
+  background-color: #B97FC9;
+}
+
+.water {
+  background-color: #4592C4;
+}
+
+.flying {
+  background-color: #3DC7EF;
+}
+
+.normal {
+  background-color: #A4ACAF;
+}
+
+.eletric {
+  background-color: #EED535;
+}
+
+.ice {
+background-color: #51C4E7;
+}
+
+.fighting {
+  background-color: #D56723;
+}
+
+.psychic {
+  background-color: #F366B9;
+}
+
+.rock {
+  background-color: #A38C21;
+}
+
+.dark {
+  background-color: #707070;
+}
+
+.steel {
+  background-color: #616161;
+}
+
+.fairy {
+  background-color: #FDB9E9;
+}

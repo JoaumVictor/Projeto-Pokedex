@@ -1,0 +1,22 @@
+.header-content {
+  display: flex;
+  height: auto;
+  width: 100%;
+  background-color: rgb(232, 72, 72);
+  color: white;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.header-content h1 {
+  font-size: 65px;
+}
+
+.header-content div {
+  display: flex;
+  align-items: center;
+}
+
+.header-img {
+  width: 150px;
+}

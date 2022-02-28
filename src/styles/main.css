@@ -1,0 +1,22 @@
+.main-content {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  background: #fff url(../img/fundo-branco.png);
+  width: 70%;
+  margin: 20px;
+}
+
+.pokemons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  flex-flow: row wrap;
+}
+
+.m {
+  border: 3px solid red;
+}

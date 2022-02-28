@@ -1,0 +1,29 @@
+.filtros-content {
+  display: flex;
+  height: 60px;
+  border: 3px solid #999;
+  border-radius: 8px;
+  margin: 20px auto;
+  width: 70%;
+  justify-content: center;
+  padding: 10px;
+}
+
+.content-name, .content-type {
+  display: flex;
+  padding-left: 12px;
+  padding-right: 12px;
+  font-size: 12px;
+  align-items: center;
+  width: 50%;
+}
+
+.content-name input, .content-type input {
+  height: 90%;
+  margin: 10px auto;
+  padding-left: 8px;
+  border-radius: 8px;
+  font-size: 20px;
+  width: 80%;
+  background-color: transparent;
+}
