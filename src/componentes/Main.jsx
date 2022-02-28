@@ -15,6 +15,14 @@ function Main() {
     proxPag: '',
   });
 
+  const carregaProxPokemons = () => {
+    axios(pages.proxPag).then(({ data }) => {
+      const listaNova = listaDePokemons.concat(data.results);
+      setListaDePokemons(listaNova);
+      pages.proxPag = data.next;
+    });
+  };
+
   const carregaPokemons = () => {
     axios(pages.inicial).then(({ data }) => {
       setListaDePokemons(data.results);
@@ -27,14 +35,6 @@ function Main() {
   useEffect(() => {
     carregaPokemons();
   }, []);
-
-  const carregaProxPokemons = () => {
-    axios(pages.proxPag).then(({ data }) => {
-      const listaNova = listaDePokemons.concat(data.results);
-      setListaDePokemons(listaNova);
-      pages.proxPag = data.next;
-    });
-  };
 
   const funcInputNome = ({ target }) => {
     setInputNome(target.value);

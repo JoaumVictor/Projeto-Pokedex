@@ -9,11 +9,13 @@ function FilterContent({ inputNome, funcInputNome, funcFiltraNome }) {
       <div className="content-name">
         <h2>Filtrar por Nome</h2>
         <input onChange={funcInputNome} value={inputNome} className="filtra-nome" type="text" />
-        <button onClick={funcFiltraNome} type="button">Pesquisar</button>
+        <span className="search">
+          <ion-icon onClick={funcFiltraNome} name="search-outline" />
+        </span>
       </div>
       <div className="content-type">
         <h2>Filtrar por Tipo</h2>
-        <input placeholder="em desenvolvimento" disabled className="filtra-tipo" type="text" />
+        <input type="text" className="content-type" disabled placeholder="em desenvolvimento" />
       </div>
     </div>
   );
