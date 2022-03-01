@@ -5,7 +5,7 @@
   align-items: center;
   background: #fff url(../img/fundo-branco.png);
   width: 70%;
-  margin: 20px;
+  margin: 0 20px;
 }
 
 .pokemons-container {
@@ -15,8 +15,21 @@
   align-content: center;
   width: 100%;
   flex-flow: row wrap;
+  padding: 25px;
+  padding-bottom: 45px;
 }
 
 .m {
   border: 3px solid red;
+}
+
+.mensagem-vazio {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid rgb(245, 20, 20);
+  border-radius: 8px;
+  height: 300px;
+  width: 70%;
 }

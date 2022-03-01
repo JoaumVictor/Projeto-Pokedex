@@ -33,10 +33,12 @@
   margin-left: 40px;
   border-radius: 50%;
   cursor: pointer;
+  opacity: 0.85;
 }
 
 .div-ajuda img:hover {
   animation: efeitinho 1s infinite;
+  opacity: 1;
 }
 
 @keyframes efeitinho {

@@ -1,61 +1,95 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import ButtonsContent from './ButtonsContent';
 import CreateCards from './CreateCards';
-import '../styles/main.css';
 import FilterContent from './FilterContent';
+import '../styles/main.css';
 
 function Main() {
   const [listaDePokemons, setListaDePokemons] = useState([]);
   const [inputNome, setInputNome] = useState('');
   const [filtraNome, setFiltraNome] = useState('');
+  const [vazio, setVazio] = useState(false);
+  const [mensagem, setMensagem] = useState(false);
   const [pages, setPages] = useState({
-    inicial: 'https://pokeapi.co/api/v2/pokemon?limit=100&offset=0',
-    proxPag: '',
+    filtro: 'https://pokeapi.co/api/v2/pokemon/',
+    iniciaPagina: true,
+    primeira: 'https://pokeapi.co/api/v2/pokemon?limit=151&offset=0',
+    segunda: 'https://pokeapi.co/api/v2/pokemon?limit=100&offset=151',
+    terceira: 'https://pokeapi.co/api/v2/pokemon?limit=135&offset=251',
+    quarta: 'https://pokeapi.co/api/v2/pokemon?limit=107&offset=386',
+    quinta: 'https://pokeapi.co/api/v2/pokemon?limit=156&offset=493',
+    sexta: 'https://pokeapi.co/api/v2/pokemon?limit=72&offset=649',
+    setima: 'https://pokeapi.co/api/v2/pokemon?limit=88&offset=721',
+    oitava: 'https://pokeapi.co/api/v2/pokemon?limit=89&offset=809',
   });
 
-  const carregaProxPokemons = () => {
-    axios(pages.proxPag).then(({ data }) => {
-      const listaNova = listaDePokemons.concat(data.results);
-      setListaDePokemons(listaNova);
-      pages.proxPag = data.next;
-    });
-  };
-
-  const carregaPokemons = () => {
-    axios(pages.inicial).then(({ data }) => {
+  const carregaPokemons = async (pagina) => {
+    axios(pagina).then(({ data }) => {
       setListaDePokemons(data.results);
-      setPages({
-        proxPag: data.next,
-      });
     });
+    setPages({
+      iniciaPagina: false,
+    });
+    setMensagem(false);
   };
 
   useEffect(() => {
-    carregaPokemons();
+    carregaPokemons(pages.primeira);
+    if (!vazio) {
+      console.log('Utilize a pokedéx com sabedoria XD');
+    }
   }, []);
 
   const funcInputNome = ({ target }) => {
     setInputNome(target.value);
   };
 
+  const buscaVazia = () => {
+    const teste = listaDePokemons.filter((alvo) => alvo.name.includes(filtraNome));
+    if (teste.length === 0) {
+      setVazio(false);
+      setMensagem(true);
+      return;
+    }
+    setVazio(true);
+    setMensagem(false);
+  };
+
+  useEffect(() => {
+    if (!pages.iniciaPagina) {
+      buscaVazia();
+    }
+  }, [filtraNome]);
+
   const realizaFiltro = () => {
-    // if (inputNome === '') {
-    //   setFiltraNome('');
-    //   return;
-    // }
-    // console.log(typeof inputNome);
-    // const teste = Number(inputNome);
-    // console.log(typeof teste);
-    // console.log(teste);
-    // if (Number.isNaN(teste)) {
-    //   console.log('Você digitou uma palavra');
-    //   setFiltraNome(inputNome);
-    //   return;
-    // }
-    // alert('Por favor, digite apenas letras!');
-    setFiltraNome(inputNome);
+    const inputNumber = Number(inputNome);
+    if (inputNome === '') {
+      setFiltraNome('');
+      return;
+    }
+    if (Number.isNaN(inputNumber)) {
+      setFiltraNome(inputNome);
+      return;
+    }
+    const funcFiltraNome = (id) => {
+      axios(`https://pokeapi.co/api/v2/pokemon/${id}`)
+        .then(({ data }) => {
+          setFiltraNome(data.name);
+        });
+    };
+    funcFiltraNome(inputNumber);
+  };
+
+  const funcFiltraTipo = (e) => {
+    const buscar = e.target.value;
+    console.log(buscar);
+  };
+
+  const escolheGeracao = () => {
+    axios(pages.segunda).then(({ data }) => {
+      console.log(data);
+    });
   };
 
   return (
@@ -64,6 +98,8 @@ function Main() {
         inputNome={inputNome}
         funcInputNome={funcInputNome}
         funcFiltraNome={realizaFiltro}
+        funcFiltraTipo={funcFiltraTipo}
+        escolheGeracao={escolheGeracao}
       />
       <div className="pokemons-container">
         { listaDePokemons
@@ -74,8 +110,12 @@ function Main() {
               pokeMap={alvo}
             />
           )) }
+        { mensagem && (
+        <div className="mensagem-vazio">
+          <p>Mensagem de pokemons vazios</p>
+        </div>
+        )}
       </div>
-      <ButtonsContent trocaPagina={carregaProxPokemons} />
     </main>
   );
 }
