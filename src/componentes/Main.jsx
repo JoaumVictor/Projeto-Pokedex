@@ -4,6 +4,7 @@ import axios from 'axios';
 import CreateCards from './CreateCards';
 import FilterContent from './FilterContent';
 import '../styles/main.css';
+import Button from './Button';
 
 function Main() {
   const [listaDePokemons, setListaDePokemons] = useState([]);
@@ -13,6 +14,7 @@ function Main() {
   const [mensagem, setMensagem] = useState(false);
   const [pages, setPages] = useState({
     filtro: 'https://pokeapi.co/api/v2/pokemon/',
+    filtroGeracao: 'https://pokeapi.co/api/v2/generation/',
     iniciaPagina: true,
     primeira: 'https://pokeapi.co/api/v2/pokemon?limit=151&offset=0',
     segunda: 'https://pokeapi.co/api/v2/pokemon?limit=100&offset=151',
@@ -22,6 +24,7 @@ function Main() {
     sexta: 'https://pokeapi.co/api/v2/pokemon?limit=72&offset=649',
     setima: 'https://pokeapi.co/api/v2/pokemon?limit=88&offset=721',
     oitava: 'https://pokeapi.co/api/v2/pokemon?limit=89&offset=809',
+    tudo: 'https://pokeapi.co/api/v2/pokemon?limit=898&offset=0',
   });
 
   const carregaPokemons = async (pagina) => {
@@ -29,9 +32,23 @@ function Main() {
       setListaDePokemons(data.results);
     });
     setPages({
+      ...pages,
       iniciaPagina: false,
     });
     setMensagem(false);
+  };
+
+  const escolheGeracao = (id) => {
+    carregaPokemons(pages[id]);
+    const butGen = document.querySelectorAll('.but');
+    butGen.forEach((alvo) => {
+      if (alvo.id !== id) {
+        alvo.classList.remove('select');
+      }
+      if (alvo.id === id) {
+        alvo.classList.add('select');
+      }
+    });
   };
 
   useEffect(() => {
@@ -81,24 +98,12 @@ function Main() {
     funcFiltraNome(inputNumber);
   };
 
-  const funcFiltraTipo = (e) => {
-    const buscar = e.target.value;
-    console.log(buscar);
-  };
-
-  const escolheGeracao = () => {
-    axios(pages.segunda).then(({ data }) => {
-      console.log(data);
-    });
-  };
-
   return (
     <main className="main-content">
       <FilterContent
         inputNome={inputNome}
         funcInputNome={funcInputNome}
         funcFiltraNome={realizaFiltro}
-        funcFiltraTipo={funcFiltraTipo}
         escolheGeracao={escolheGeracao}
       />
       <div className="pokemons-container">
@@ -112,7 +117,16 @@ function Main() {
           )) }
         { mensagem && (
         <div className="mensagem-vazio">
-          <p>Mensagem de pokemons vazios</p>
+          <h2>Nenhum pokémon corresponde a sua pesquisa</h2>
+          <br />
+          <ul>
+            <li>Procure por um pokémon de cada vez</li>
+            <li>
+              Tente procurar em
+              {' '}
+              <Button id="tudo" classe="but todos" value="Todos os pokémons" onClick={escolheGeracao} />
+            </li>
+          </ul>
         </div>
         )}
       </div>

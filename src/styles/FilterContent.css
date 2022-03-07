@@ -18,10 +18,11 @@
   font-size: 12px;
   align-items: center;
   width: 50%;
+  height: 100px;
 }
 
 .content-name h2 {
-  width: 150px;
+  width: 200px;
 }
 
 .content-name input{
@@ -62,6 +63,11 @@
 }
 
 .but:hover {
+  background-color: #E84848;
+  color: white;
+}
+
+.select {
   background-color: #E84848;
   color: white;
 }

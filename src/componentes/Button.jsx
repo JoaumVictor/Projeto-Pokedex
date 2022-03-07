@@ -8,7 +8,7 @@ function Button({
     <button
       type="button"
       className={classe}
-      onClick={onClick}
+      onClick={() => onClick(id)}
       id={id}
     >
       {value}
