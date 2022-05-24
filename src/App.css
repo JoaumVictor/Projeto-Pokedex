@@ -38,17 +38,18 @@
 
 .div-ajuda img:hover {
   animation: efeitinho 1s infinite;
+  transition: 0.5s;
   opacity: 1;
 }
 
 @keyframes efeitinho {
 0% {
-  transform: scale(1.1);
+  transform: scale(1.0);
 }
 50% {
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 100% {
-  transform: scale(1.1);
+  transform: scale(1.0);
 }
 }

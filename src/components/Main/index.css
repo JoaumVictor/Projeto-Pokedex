@@ -3,7 +3,7 @@
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: center;
-  background: #fff url(../img/fundo-branco.png);
+  background: #fff url(../../img/fundo-branco.png);
   min-height: 85vh;
   width: 70%;
   margin: 0 20px;

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import '../styles/FilterContent.css';
-import Button from './Button';
+import './index.css';
+import Button from '../Button/Button';
 
 function FilterContent({
   inputNome, funcInputNome, funcFiltraNome, escolheGeracao,

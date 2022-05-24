@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import CreateCards from './CreateCards';
-import FilterContent from './FilterContent';
-import '../styles/main.css';
-import Button from './Button';
+import CreateCards from '../CreateCards/CreateCards';
+import FilterContent from '../FilterContent/FilterContent';
+import PokemonNotFound from '../PokemonNotFound';
+import './index.css';
 
 function Main() {
   const [listaDePokemons, setListaDePokemons] = useState([]);
@@ -28,13 +28,8 @@ function Main() {
   });
 
   const carregaPokemons = async (pagina) => {
-    axios(pagina).then(({ data }) => {
-      setListaDePokemons(data.results);
-    });
-    setPages({
-      ...pages,
-      iniciaPagina: false,
-    });
+    axios(pagina).then(({ data }) => setListaDePokemons(data.results));
+    setPages({ ...pages, iniciaPagina: false });
     setMensagem(false);
   };
 
@@ -42,20 +37,14 @@ function Main() {
     carregaPokemons(pages[id]);
     const butGen = document.querySelectorAll('.but');
     butGen.forEach((alvo) => {
-      if (alvo.id !== id) {
-        alvo.classList.remove('select');
-      }
-      if (alvo.id === id) {
-        alvo.classList.add('select');
-      }
+      if (alvo.id !== id) alvo.classList.remove('select');
+      if (alvo.id === id) alvo.classList.add('select');
     });
   };
 
   useEffect(() => {
     carregaPokemons(pages.primeira);
-    if (!vazio) {
-      console.log('Utilize a pokedéx com sabedoria XD');
-    }
+    if (!vazio) console.log('Utilize a pokedéx com sabedoria XD');
   }, []);
 
   const funcInputNome = ({ target }) => {
@@ -115,20 +104,7 @@ function Main() {
               pokeMap={alvo}
             />
           )) }
-        { mensagem && (
-        <div className="mensagem-vazio">
-          <h2>Nenhum pokémon corresponde a sua pesquisa</h2>
-          <br />
-          <ul>
-            <li>Procure por um pokémon de cada vez</li>
-            <li>
-              Tente procurar em
-              {' '}
-              <Button id="tudo" classe="but todos" value="Todos os pokémons" onClick={escolheGeracao} />
-            </li>
-          </ul>
-        </div>
-        )}
+        { mensagem && <PokemonNotFound /> }
       </div>
     </main>
   );

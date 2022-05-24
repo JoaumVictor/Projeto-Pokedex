@@ -1,6 +1,7 @@
 import React from 'react';
-import '../styles/buttonsContent.css';
 import PropTypes from 'prop-types';
+
+import './index.css';
 
 function ButtonsContent({ trocaPagina }) {
   return (
